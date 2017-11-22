@@ -7,8 +7,6 @@ declare var autocomplete;
 @Injectable()
 export class MapsUitlity {  
 
-
-
 static displayGoogleRoute(mapDiv,Origin,Destination) {
         let directionsService = new google.maps.DirectionsService;
         let directionsDisplay = new google.maps.DirectionsRenderer;
