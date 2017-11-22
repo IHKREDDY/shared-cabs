@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import {SelectRoutePage} from '../select-route/select-route'
+import {SelectRoutePage} from '../select-route/select-route';
+import {MapsUitlity} from '../../app/mapsutility.service';
 //import {GoogleplaceDirective} from '../../app/mapsautocomplete.directive'
 
 declare var google;
+
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers:[MapsUitlity]
 })
+
 
 export class HomePage {
  Origin: any;
@@ -16,43 +20,10 @@ export class HomePage {
  googleOriginName:any;
  googleDestinationName:any;
 
- autocomplete:any;
-  constructor(public navCtrl: NavController,public storage :Storage) {
+
+  constructor(public navCtrl: NavController,public storage :Storage,public mapsUitlity:MapsUitlity) {
 
   }
-
-    calculateAndDisplayRoute() {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 17,
-          center: {lat: 41.85, lng: -87.65}
-        });
-        directionsDisplay.setMap(map);
-        
-        directionsService.route({
-          origin: this.googleOriginName,
-          destination: this.googleDestinationName,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-
-      setLocation()
-      { 
-
-
-      }
-
-      getLocation()
-      {
-        // alert(JSON.stringify(this.storage.get('UserLocation')))
-      }
 
       launchShortestRoutePage()
       {
@@ -66,23 +37,18 @@ export class HomePage {
 
      ngOnInit() 
       {
-    //  this.setAutoComplete();
+    //  this.setAutoComplete();;an
       }
 
       ionViewDidEnter()
       {
-        //var nativeTxtOrigin = document.getElementById('txtOrigin').getElementsByTagName('input')[0];
-        var nativeTxtDestination = document.getElementById('txtDestination').getElementsByTagName('input')[0];
-       // new google.maps.places.Autocomplete(nativeTxtOrigin);
-        this.autocomplete = new google.maps.places.Autocomplete(nativeTxtDestination);
-
-       google.maps.event.addListener(this.autocomplete, 'place_changed', ()=> {
-       var place = this.autocomplete.getPlace();
-       this.googleOriginName = 'Dubai International Airport';
-       this.googleDestinationName = place.name;
-       this.calculateAndDisplayRoute(); 
-        });
-        
+       //this.googleOriginName = 'Dubai International Airport';
+       var thisClass = this;
+       this.googleOriginName = {"lat":25.2531745,"lng":55.365672800000084};
+       this.mapsUitlity.setMapsAutoComplete(document.getElementById('txtDestination'),function(destination)
+       {
+          thisClass.googleDestinationName = destination;
+          MapsUitlity.displayGoogleRoute(document.getElementById('map'),thisClass.googleOriginName,thisClass.googleDestinationName);
+       }); 
       }
-
 }
