@@ -13,7 +13,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'get-pnr.html',
 })
 export class GetPnrPage {
-<<<<<<< HEAD
 booking =
 {
  "pnr":"ABCDEF",
@@ -26,11 +25,9 @@ booking =
      { "origin":"DXB", "origin_airport":"Dubai International Airport","destination":"MAA", "destination_airport":"Chennai International Airport" }  
   ],
 }
-=======
   PNR:any;
   LName:any;
 
->>>>>>> 68ab5a0e808918e6074c0c394b92c130b8142304
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
