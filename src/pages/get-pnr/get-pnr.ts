@@ -25,8 +25,7 @@ export class GetPnrPage {
   }
 
   getPNRDetails()  {
-    
-    console.log("Retriving your PNR Please wait ...Siva Tukanti"+this.PNR+this.LName);
+        console.log("Retriving your PNR Please wait ...Siva Tukanti"+this.PNR+this.LName);
   }
   
 
