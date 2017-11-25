@@ -28,13 +28,6 @@ export class SelectRoutePage {
   }
 
   ionViewDidEnter() {
-    //min max distance = 
-//      let minDistance= 0;
-//      let distance  = 0;
-//      let 
-//      this.RouteList.routes.forEach(route => {
-//             minDistance = MapsUitlity.calculateDistance(this.Destination.lat,this.Destination.lng,route.lat,route.lng,"K");
-// });
     }
 
 }

@@ -15,6 +15,18 @@ import {Http} from '@angular/http';
   templateUrl: 'get-pnr.html',
 })
 export class GetPnrPage {
+booking =
+{
+ "pnr":"ABCDEF",
+ "paxes": [
+        { "firstname":"sachin", "lastname":"tendulkar"  },
+        { "firstname":"virat", "lastname":"kohli"},
+        { "firstname":"yuvraj", "lastname":"singh"  },
+       ],
+ "travelplans": [
+     { "origin":"DXB", "origin_airport":"Dubai International Airport","destination":"MAA", "destination_airport":"Chennai International Airport" }  
+  ],
+}
   PNR:any;
   LName:any;
   list;
