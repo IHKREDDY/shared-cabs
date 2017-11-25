@@ -1,30 +1,22 @@
-[
-{
-    "PNR:"ABCDEF",
+[{
+    "PNR":"ABCDEF",
     "PAX": [
         { "firstname":"sachin", "lastname":"tendulkar"  },
         { "firstname":"virat", "lastname":"kohli"  },
-        { "firstname":"yuvraj", "lastname":"singh"  },
-    ],
+        { "firstname":"yuvraj", "lastname":"singh"  }    ],
     "PAX COUNT":"3",
     "TRAVELPLAN": [
-        { "ORIGIN":"DXB", "ORIGIN AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "ORIGIN AIRPORT":"Chennai International Airport" }
-    ],
-
+        { "ORIGIN":"DXB", "ORIGIN_AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "DESTINATION_AIRPORT":"Chennai International Airport" }
+    ]
  },
 {
-    "PNR:"KLMNOP",
+    "PNR":"KLMNOP",
     "PAX": [
         { "firstname":"david", "lastname":"warner"  },
         { "firstname":"glenn", "lastname":"maxwell"  },
-        { "firstname":"ricky", "lastname":"pointing"  },
-    ],
+        { "firstname":"ricky", "lastname":"pointing"  }    ],
     "PAX COUNT":"3",
     "TRAVELPLAN": [
-        { "ORIGIN":"DXB", "ORIGIN AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "ORIGIN AIRPORT":"Chennai International Airport" }
-    ],
-
- },
-
-
-]
+        { "ORIGIN":"DXB", "ORIGIN_AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "DESTINATION_AIRPORT":"Chennai International Airport" }
+    ]
+ }]
