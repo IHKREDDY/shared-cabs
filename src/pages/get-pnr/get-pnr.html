@@ -25,13 +25,13 @@
    <ion-grid>
      <ion-row>
     <ion-col width-35>
-     <ion-input   placeholder="Last Name" ></ion-input>
+     <ion-input   placeholder="Last Name"  [(ngModel)]="LName" ></ion-input>
     </ion-col>
    <ion-col width-35>
-     <ion-input   placeholder="Booking Reference"  ></ion-input>
+     <ion-input   placeholder="Booking Reference"  [(ngModel)]="PNR" ></ion-input>
     </ion-col>
     <ion-col width-30>
-            <button ion-button>Retrieve booking</button>
+            <button ion-button full (click)="getPNRDetails()"> Go</button>
     </ion-col>
   </ion-row>
   </ion-grid>

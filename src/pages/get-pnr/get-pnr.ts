@@ -13,6 +13,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'get-pnr.html',
 })
 export class GetPnrPage {
+  PNR:any;
+  LName:any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -20,5 +23,11 @@ export class GetPnrPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetPnrPage');
   }
+
+  getPNRDetails()  {
+    
+    console.log("Retriving your PNR Please wait ...Siva Tukanti"+this.PNR+this.LName);
+  }
+  
 
 }

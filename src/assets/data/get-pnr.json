@@ -1,0 +1,30 @@
+[
+{
+    "PNR:"ABCDEF",
+    "PAX": [
+        { "firstname":"sachin", "lastname":"tendulkar"  },
+        { "firstname":"virat", "lastname":"kohli"  },
+        { "firstname":"yuvraj", "lastname":"singh"  },
+    ],
+    "PAX COUNT":"3",
+    "TRAVELPLAN": [
+        { "ORIGIN":"DXB", "ORIGIN AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "ORIGIN AIRPORT":"Chennai International Airport" }
+    ],
+
+ },
+{
+    "PNR:"KLMNOP",
+    "PAX": [
+        { "firstname":"david", "lastname":"warner"  },
+        { "firstname":"glenn", "lastname":"maxwell"  },
+        { "firstname":"ricky", "lastname":"pointing"  },
+    ],
+    "PAX COUNT":"3",
+    "TRAVELPLAN": [
+        { "ORIGIN":"DXB", "ORIGIN AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "ORIGIN AIRPORT":"Chennai International Airport" }
+    ],
+
+ },
+
+
+]
