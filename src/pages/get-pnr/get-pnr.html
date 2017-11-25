@@ -42,6 +42,23 @@
 <ion-card>
 
   <ion-card-header>
+    Passenger list
+  </ion-card-header>
+
+
+  <ion-card-content>
+   <ion-list *ngFor="let pax of booking.paxes">
+    <ion-item>
+      <ion-icon name="heart"></ion-icon>
+      <ion-label>{{pax.firstname}}/{{pax.lastname}}</ion-label>
+    </ion-item>
+  </ion-list>
+ </ion-card-content>
+</ion-card>
+
+<ion-card>
+
+  <ion-card-header>
     Available Cab  options
   </ion-card-header>
 

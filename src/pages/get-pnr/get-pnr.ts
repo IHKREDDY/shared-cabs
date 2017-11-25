@@ -16,9 +16,9 @@ export class GetPnrPage {
 booking =
 {
  "pnr":"ABCDEF",
- "pax": [
+ "paxes": [
         { "firstname":"sachin", "lastname":"tendulkar"  },
-        { "firstname":"virat", "lastname":"kohli"  },
+        { "firstname":"virat", "lastname":"kohli"},
         { "firstname":"yuvraj", "lastname":"singh"  },
        ],
  "travelplans": [
