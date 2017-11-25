@@ -42,22 +42,22 @@
 <ion-card>
 
   <ion-card-header>
-    Availablen Cab  options
+    Available Cab  options
   </ion-card-header>
 
+
   <ion-card-content>
-    <ion-list>
-      <ion-item>
-      <ion-label>To Dubai International Airport</ion-label>
+   <ion-list *ngFor="let travelplan of booking.travelplans">
+    <ion-item>
+      <ion-label>{{travelplan.origin_airport}}</ion-label>
       <ion-checkbox  checked="true"></ion-checkbox>
     </ion-item>
-      <ion-item>
-      <ion-label>From Chennai Airport</ion-label>
+    <ion-item>
+      <ion-label>{{travelplan.destination_airport}}</ion-label>
       <ion-checkbox checked="true"></ion-checkbox>
     </ion-item>
   </ion-list>
-  </ion-card-content>
-
+ </ion-card-content>
 </ion-card>
 
 

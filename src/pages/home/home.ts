@@ -24,7 +24,6 @@ export class HomePage {
   constructor(public navCtrl: NavController,public storage :Storage,public mapsUitlity:MapsUitlity) {
 
   }
-
       launchShortestRoutePage()
       {
       let UserLocation ={
