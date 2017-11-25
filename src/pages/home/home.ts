@@ -48,6 +48,7 @@ export class HomePage {
        this.mapsUitlity.setMapsAutoComplete(document.getElementById('txtDestination'),function(destination)
        {
           thisClass.googleDestinationName = destination;
+           console.log(JSON.stringify(destination));
           MapsUitlity.displayGoogleRoute(document.getElementById('map'),thisClass.googleOriginName,thisClass.googleDestinationName);
        }); 
       }

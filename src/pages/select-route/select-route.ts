@@ -19,15 +19,22 @@ export class SelectRoutePage {
 
  Origin: any;
  Destination: any;
+ RouteList:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public mapsUitlity:MapsUitlity) {
   this.Origin = this.navParams.get('currentOrigin');
   this.Destination = this.navParams.get('currentDestination');
-alert('hello');
+  this.RouteList = {"routes":[{"lat":25.254226,"lng":55.330306000000064},{"lat":25.1279484,"lng":55.38626380000005},{"lat":25.1648925,"lng":55.4084034}]}
   }
 
   ionViewDidEnter() {
-       MapsUitlity.displayGoogleRoute(document.getElementById('map1'),this.Origin,this.Destination);
-}
+    //min max distance = 
+//      let minDistance= 0;
+//      let distance  = 0;
+//      let 
+//      this.RouteList.routes.forEach(route => {
+//             minDistance = MapsUitlity.calculateDistance(this.Destination.lat,this.Destination.lng,route.lat,route.lng,"K");
+// });
+    }
 
 }

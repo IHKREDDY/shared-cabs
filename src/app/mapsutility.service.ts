@@ -15,8 +15,6 @@ static displayGoogleRoute(mapDiv,Origin,Destination) {
           center: {lat: 41.85, lng: -87.65}
         });
         directionsDisplay.setMap(map);
-        alert(JSON.stringify(Origin));
-        alert(JSON.stringify(Destination));
         directionsService.route({
           origin: Origin,
           destination: Destination,
@@ -30,7 +28,7 @@ static displayGoogleRoute(mapDiv,Origin,Destination) {
         });
       }
 
-calculateDistance(lat1, lon1, lat2, lon2, unit) {
+static calculateDistance(lat1, lon1, lat2, lon2, unit) {
 	let radlat1 = Math.PI * lat1/180
 	let radlat2 = Math.PI * lat2/180
 	let theta = lon1-lon2

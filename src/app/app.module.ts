@@ -8,6 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { GetPnrPage } from '../pages/get-pnr/get-pnr';
 import {SelectRoutePage} from '../pages/select-route/select-route'
 import {GoogleplaceDirective} from './mapsautocomplete.directive'
 
@@ -16,6 +17,7 @@ import {GoogleplaceDirective} from './mapsautocomplete.directive'
     MyApp,
     HomePage,
     SelectRoutePage,
+    GetPnrPage,
     GoogleplaceDirective
   ],
   imports: [
@@ -26,6 +28,7 @@ import {GoogleplaceDirective} from './mapsautocomplete.directive'
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    GetPnrPage,
     HomePage,
     SelectRoutePage
   ],

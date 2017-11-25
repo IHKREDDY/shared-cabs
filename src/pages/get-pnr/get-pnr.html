@@ -7,12 +7,60 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>get-pnr</ion-title>
+    <ion-title>Display cab options</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+<ion-card>
+
+  <ion-card-header>
+   Retrieve booking
+  </ion-card-header>
+
+  <ion-card-content>
+   <ion-grid>
+     <ion-row>
+    <ion-col width-35>
+     <ion-input   placeholder="Last Name" ></ion-input>
+    </ion-col>
+   <ion-col width-35>
+     <ion-input   placeholder="Booking Reference"  ></ion-input>
+    </ion-col>
+    <ion-col width-30>
+            <button ion-button>Retrieve booking</button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+  </ion-card-content>
+
+</ion-card>
+
+<ion-card>
+
+  <ion-card-header>
+    Availablen Cab  options
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+      <ion-label>To Dubai International Airport</ion-label>
+      <ion-checkbox  checked="true"></ion-checkbox>
+    </ion-item>
+      <ion-item>
+      <ion-label>From Chennai Airport</ion-label>
+      <ion-checkbox checked="true"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  </ion-card-content>
+
+</ion-card>
+
+
+<button ion-button full >Continue</button>
 
 </ion-content>
