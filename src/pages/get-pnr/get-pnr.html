@@ -66,11 +66,11 @@
   <ion-card-content>
    <ion-list *ngFor="let travelplan of booking.travelplans">
     <ion-item>
-      <ion-label>{{travelplan.origin_airport}}</ion-label>
+      <ion-label>To {{travelplan.origin_airport}}</ion-label>
       <ion-checkbox  checked="true"></ion-checkbox>
     </ion-item>
     <ion-item>
-      <ion-label>{{travelplan.destination_airport}}</ion-label>
+      <ion-label>From {{travelplan.destination_airport}}</ion-label>
       <ion-checkbox checked="true"></ion-checkbox>
     </ion-item>
   </ion-list>

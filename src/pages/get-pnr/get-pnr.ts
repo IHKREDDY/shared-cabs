@@ -15,7 +15,7 @@ import {Http} from '@angular/http';
   templateUrl: 'get-pnr.html',
 })
 export class GetPnrPage {
-booking =
+booking1 =
 {
  "pnr":"ABCDEF",
  "paxes": [
@@ -27,9 +27,17 @@ booking =
      { "origin":"DXB", "origin_airport":"Dubai International Airport","destination":"MAA", "destination_airport":"Chennai International Airport" }  
   ],
 }
+booking=
+{
+ "pnr":"",
+ "paxes": [
+
+       ],
+ "travelplans": [],
+}
   PNR:any;
   LName:any;
-  list;
+  listPNR;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http) {
    
@@ -41,10 +49,10 @@ booking =
   }
 
   getPNRDetails()  {
-    
+    this.booking=this.booking1;
     this.http.get('assets/data/get-pnr.json')
-    .subscribe(res => this.list = res.json());
-        console.log("Retriving your PNR Please wait ...Siva Tukanti"+this.list);
+    .subscribe(res => this.listPNR = res.json());
+        console.log("Retriving your PNR Please wait ...Siva Tukanti"+JSON.stringify(this.listPNR));
   }
 
   
