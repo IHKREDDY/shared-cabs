@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Http} from '@angular/http';
+import {SelectedCab  } from '../../app/SelectedCab';
 
 
 /**
@@ -49,6 +50,10 @@ booking=
   }
 
   getPNRDetails()  {
+    //creating selected cab object
+    //let objSelectedCab = new SelectedCab;
+    //objSelectedCab.cabList.push();
+
     this.booking=this.booking1;
     this.http.get('assets/data/get-pnr.json')
     .subscribe(res => this.listPNR = res.json());
