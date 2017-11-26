@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 
 
 /**
@@ -15,47 +15,65 @@ import {Http} from '@angular/http';
   templateUrl: 'get-pnr.html',
 })
 export class GetPnrPage {
-booking1 =
-{
- "pnr":"ABCDEF",
- "paxes": [
-        { "firstname":"sachin", "lastname":"tendulkar"  },
-        { "firstname":"virat", "lastname":"kohli"},
-        { "firstname":"yuvraj", "lastname":"singh"  },
-       ],
- "travelplans": [
-     { "origin":"DXB", "origin_airport":"Dubai International Airport","destination":"MAA", "destination_airport":"Chennai International Airport" }  
-  ],
-}
-booking=
-{
- "pnr":"",
- "paxes": [
-
-       ],
- "travelplans": [],
-}
-  PNR:any;
-  LName:any;
+  booking1 =
+  {
+    "pnr": "",
+    "paxes": [{ " ": " ", " ": " " }],
+    "travelplans": [],
+  };
+  booking =
+    {
+      "pnr": "",
+      "paxes": [{ " ": " ", " ": " " }],
+      "travelplans": [],
+    };
+  PNR: any;
+  LName: any;
   listPNR;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http) {
-   
-       // console.log("Retriving your PNR Please wait ...Siva Tukanti"+this.data["PAX"]);
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
+    // console.log("Retriving your PNR Please wait ...Siva Tukanti"+this.data["PAX"]);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetPnrPage');
   }
 
-  getPNRDetails()  {
-    this.booking=this.booking1;
+  getPNRDetails() {
+
+    // this.fetchPNRJSson(this.listPNR,this.parseJson);
     this.http.get('assets/data/get-pnr.json')
-    .subscribe(res => this.listPNR = res.json());
-        console.log("Retriving your PNR Please wait ...Siva Tukanti"+JSON.stringify(this.listPNR));
+      .subscribe(res => this.parseJson(res.json()));
+
+    //  this.booking.pnr=this.listPNR.pnr;
+    //  this.booking.paxes=this.listPNR.paxes;
+
+    // console.log("Retriving your PNR Please wait ...Siva Tukanti" +this.booking);
+  }
+  parseJson(listpnr1) {
+    JSON.stringify(listpnr1);
+    // console.log("Retriving your PNR Please wait ...Siva Tukanti"+PNRPOJO);
+    Object.keys(listpnr1).forEach(key => {
+      console.log(key + " for " + listpnr1[key].pnr);
+      if (listpnr1[key].pnr.toUpperCase() == this.PNR.toUpperCase()) {
+        this.booking = listpnr1[key];
+      }
+      else{
+        this.booking= this.booking1;
+      }
+
+    });
   }
 
-  
-  
+}
 
+class PNRPOJO {
+  pnr: string;
+
+  constructor(pnr: string) {
+    this.pnr = pnr;
+  }
+  welcome() {
+    return "Hello, my name is " + this.pnr;
+  }
 }

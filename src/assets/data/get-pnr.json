@@ -1,22 +1,45 @@
 [{
-    "PNR":"ABCDEF",
-    "PAX": [
-        { "firstname":"sachin", "lastname":"tendulkar"  },
-        { "firstname":"virat", "lastname":"kohli"  },
-        { "firstname":"yuvraj", "lastname":"singh"  }    ],
-    "PAX COUNT":"3",
-    "TRAVELPLAN": [
-        { "ORIGIN":"DXB", "ORIGIN_AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "DESTINATION_AIRPORT":"Chennai International Airport" }
+    "pnr": "PNR001",
+    "paxes": [
+      { "firstname": "sachin", "lastname": "tendulkar" },
+      { "firstname": "virat", "lastname": "kohli" },
+      { "firstname": "yuvraj", "lastname": "singh" },
+      { "firstname": "Rohit", "lastname": "Sharma" }
+    ],
+    "travelplans": [
+      { "origin": "DXB", "origin_airport": "Dubai International Airport", "destination": "MAA", "destination_airport": "Chennai International Airport" }
     ]
- },
+  },
+  {
+    "pnr": "PNR003",
+    "paxes": [
+      { "firstname": "Kambli", "lastname": "Vinod" },
+      { "firstname": "Vinod", "lastname": "Khanna" },
+      { "firstname": "Amitab", "lastname": "Bachan" }
+    ],
+    "travelplans": [
+      { "origin": "HYD", "origin_airport": "HYD International Airport", "destination": "MAA", "destination_airport": "Chennai International Airport" }
+    ]
+  }
+,
 {
-    "PNR":"KLMNOP",
-    "PAX": [
-        { "firstname":"david", "lastname":"warner"  },
-        { "firstname":"glenn", "lastname":"maxwell"  },
-        { "firstname":"ricky", "lastname":"pointing"  }    ],
-    "PAX COUNT":"3",
-    "TRAVELPLAN": [
-        { "ORIGIN":"DXB", "ORIGIN_AIRPORT":"Dubai International Airport","DESTINATION":"MAA", "DESTINATION_AIRPORT":"Chennai International Airport" }
+    "pnr": "PNR002",
+    "paxes": [
+      { "firstname": "Siva", "lastname": "Tukanti" },
+      { "firstname": "Hemath", "lastname": "O" }
+    ],
+    "travelplans": [
+      { "origin": "MOM", "origin_airport": "MUmbai International Airport", "destination": "DXB", "destination_airport": "DUBAI International Airport" }
     ]
- }]
+  }
+  ,
+  {
+    "pnr": "PNR004",
+    "paxes": [
+      { "firstname": "Giri", "lastname": "DomodaraM" }
+    ],
+    "travelplans": [
+      { "origin": "HYD", "origin_airport": "HYD International Airport", "destination": "MAA", "destination_airport": "Chennai International Airport" }
+    ]
+  }
+]
