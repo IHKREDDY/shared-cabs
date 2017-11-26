@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-<<<<<<< HEAD
 import { Http } from '@angular/http';
-=======
-import {Http} from '@angular/http';
 import {SelectedCab  } from '../../app/SelectedCab';
->>>>>>> e6948ee11ddd06d93a22e23fe2c9da88fcdbc7ae
+
 
 
 /**
@@ -23,13 +20,13 @@ export class GetPnrPage {
   booking1 =
   {
     "pnr": "",
-    "paxes": [{ " ": " ", " ": " " }],
+    "paxes": [{ " ": " ", "": " " }],
     "travelplans": [],
   };
   booking =
     {
       "pnr": "",
-      "paxes": [{ " ": " ", " ": " " }],
+      "paxes": [{ " ": " ","" : " " }],
       "travelplans": [],
     };
   PNR: any;
@@ -44,18 +41,13 @@ export class GetPnrPage {
     console.log('ionViewDidLoad GetPnrPage');
   }
 
-<<<<<<< HEAD
-  getPNRDetails() {
-
-    // this.fetchPNRJSson(this.listPNR,this.parseJson);
-=======
   getPNRDetails()  {
     //creating selected cab object
     //let objSelectedCab = new SelectedCab;
     //objSelectedCab.cabList.push();
 
     this.booking=this.booking1;
->>>>>>> e6948ee11ddd06d93a22e23fe2c9da88fcdbc7ae
+
     this.http.get('assets/data/get-pnr.json')
       .subscribe(res => this.parseJson(res.json()));
 
@@ -81,13 +73,3 @@ export class GetPnrPage {
 
 }
 
-class PNRPOJO {
-  pnr: string;
-
-  constructor(pnr: string) {
-    this.pnr = pnr;
-  }
-  welcome() {
-    return "Hello, my name is " + this.pnr;
-  }
-}
