@@ -14,5 +14,82 @@
 
 
 <ion-content padding>
+    <!--Image -->
+    <ion-card>
+        <ion-card-header>
+            Payment Details
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                        <ion-col width-40>
+                        <img src="assets/imgs/payheader.jpg" height="90px">
+                        </ion-col>
+                        <ion-col width-60>
+                            
+                        </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col width-40>
+                        <ion-label>Payment Amount</ion-label>
+                    </ion-col>
+                    <ion-col width-60>
+                        <!--<ion-input type="text"></ion-input>-->
+                        <ion-input placeholder="Amount" [(ngModel)]="payAmount"></ion-input>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col width-40>
+                        <ion-label>Credit Card Number*</ion-label>
+                    </ion-col>
+                    <ion-col width-60>
+                        <!--<ion-input type="text"></ion-input>-->                        
+                    <ion-input placeholder="Card Number" [(ngModel)]="CCNo"></ion-input> </ion-col>                                                 
+                </ion-row>
+                <ion-row>
+                    <ion-col width-40>                                                    
+                        <ion-label>Card Holder Name*</ion-label>
+                    </ion-col>
+                    <ion-col width-60>
+                        <!--<ion-input type="text"></ion-input>-->
+                        <ion-input placeholder="Name" [(ngModel)]="CCName"></ion-input>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col  width-40>
+                        <ion-label>Expiry Date*</ion-label>                          
+                        </ion-col>
+                        <ion-col width-60> 
+                            <ion-item>                        
+                        <ion-select [(ngModel)]="expMonthSel">
+                                <ion-option *ngFor="let expMonth of expMonths;" [value]="expMonth">{{expMonth.name}}</ion-option>
+                            </ion-select> 
+                        </ion-item> 
+                        <ion-item>
+                            <ion-select [(ngModel)]="expYearSel">
+                                    <ion-option *ngFor="let expYear of expYears;" [value]="expYear">{{expYear.name}}</ion-option>
+                                </ion-select> 
+                            </ion-item> 
+                        </ion-col>
+                        
+                </ion-row>
+                <ion-row>
+                        <ion-col width-40>
+                        <ion-label>Security Code (CVV)*</ion-label>
+                    </ion-col>
+                    <ion-col width-60>
+                        <!--<ion-input type="text"></ion-input>-->
+                        <ion-input placeholder="CVV" [(ngModel)]="CVV"></ion-input>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                        <ion-col width-100>
+                                <button ion-button full > Pay</button>
+                        </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
 
 </ion-content>
