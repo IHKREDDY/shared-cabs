@@ -32,6 +32,7 @@ export class GetPnrPage {
   listPNR;
   selectedCab:SelectedCab;
   pnrNotFound:boolean;
+  displayWarning:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,public storage :Storage) {
      this.pnrNotFound = true;
   }
@@ -46,10 +47,9 @@ export class GetPnrPage {
 
     var BreakException = {};
     this.pnrNotFound = true;
-
+    this.displayWarning = false;
       try {
       jsonObj.forEach(element => {
-      alert(element.pnr.toUpperCase() + ' ' + this.PNR.toUpperCase())
       if (element.pnr.toUpperCase() == this.PNR.toUpperCase())
         {
           element.paxes.forEach(pax => {
@@ -62,6 +62,10 @@ export class GetPnrPage {
           });
         }
    });
+   if(this.pnrNotFound)
+   {
+     this.displayWarning = true;
+   }
       } catch (e) {
       if (e !== BreakException) throw e;
    }
@@ -76,7 +80,7 @@ export class GetPnrPage {
         this.storage.set('route_count',  this.routeCount);
         
         this.navCtrl.push(SelectCabRoutePage)
-            //creating selected cab object
+
   }
 
 
@@ -86,9 +90,6 @@ export class GetPnrPage {
         objSelectedCab.cabList = new Array();
         let cab_route_no = 0;
         this.booking.travelplans.forEach(travelplan => {
-        alert(JSON.stringify(travelplan));
-        alert("to " +travelplan.tocab_selected);
-        alert("from " + travelplan.fromcab_selected);
         if(travelplan.tocab_selected == true)
         {
          cab_route_no = cab_route_no +1;
@@ -102,7 +103,6 @@ export class GetPnrPage {
         
       });
       
-      alert(objSelectedCab.cabList.length);
       this.storage.set('selected_cabs',  objSelectedCab);
   }
 

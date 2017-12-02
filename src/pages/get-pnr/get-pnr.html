@@ -15,9 +15,12 @@
   <ion-content padding>
 
   <ion-card>
-
     <ion-card-header>
     Retrieve booking
+    </ion-card-header>
+  
+     <ion-card-header class='warning-message' [hidden]="!displayWarning">
+        Sorry, the booking reference you`ve entered is incorrect. 
     </ion-card-header>
 <form  #getbookingForm="ngForm">
     <ion-card-content class="form-group" >
