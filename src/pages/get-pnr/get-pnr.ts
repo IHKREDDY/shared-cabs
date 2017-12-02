@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { Storage } from '@ionic/storage';
 import {SelectedCab  } from '../../app/SelectedCab';
-
+import {SelectCabRoutePage} from '../select-cab-route/select-cab-route';
 
 
 /**
@@ -17,59 +18,95 @@ import {SelectedCab  } from '../../app/SelectedCab';
   templateUrl: 'get-pnr.html',
 })
 export class GetPnrPage {
-  booking1 =
-  {
+  //getbookingForm:FormGroup;
+
+  booking =
+    {
     "pnr": "",
     "paxes": [{ " ": " ", "": " " }],
     "travelplans": [],
   };
-  booking =
-    {
-      "pnr": "",
-      "paxes": [{ " ": " ","" : " " }],
-      "travelplans": [],
-    };
+  routeCount:number;
   PNR: any;
   LName: any;
   listPNR;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
-    // console.log("Retriving your PNR Please wait ...Siva Tukanti"+this.data["PAX"]);
+  selectedCab:SelectedCab;
+  pnrNotFound:boolean;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,public storage :Storage) {
+     this.pnrNotFound = true;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GetPnrPage');
-  }
+
 
   getPNRDetails()  {
-    //creating selected cab object
-    //let objSelectedCab = new SelectedCab;
-    //objSelectedCab.cabList.push();
-
-    this.booking=this.booking1;
-
     this.http.get('assets/data/get-pnr.json')
-      .subscribe(res => this.parseJson(res.json()));
-
-    //  this.booking.pnr=this.listPNR.pnr;
-    //  this.booking.paxes=this.listPNR.paxes;
-
-    // console.log("Retriving your PNR Please wait ...Siva Tukanti" +this.booking);
+      .subscribe(res => this.setCabOptions(res.json()));
   }
-  parseJson(listpnr1) {
-    JSON.stringify(listpnr1);
-    // console.log("Retriving your PNR Please wait ...Siva Tukanti"+PNRPOJO);
-    Object.keys(listpnr1).forEach(key => {
-      console.log(key + " for " + listpnr1[key].pnr);
-      if (listpnr1[key].pnr.toUpperCase() == this.PNR.toUpperCase()) {
-        this.booking = listpnr1[key];
-      }
-      else{
-        this.booking= this.booking1;
-      }
+  setCabOptions(jsonObj:any) {
 
-    });
+    var BreakException = {};
+    this.pnrNotFound = true;
+
+      try {
+      jsonObj.forEach(element => {
+      alert(element.pnr.toUpperCase() + ' ' + this.PNR.toUpperCase())
+      if (element.pnr.toUpperCase() == this.PNR.toUpperCase())
+        {
+          element.paxes.forEach(pax => {
+          if( pax.lastname.toUpperCase() == this.LName.toUpperCase())
+          {
+          this.booking = element;
+          this.pnrNotFound = false;
+          throw BreakException;
+          }
+          });
+        }
+   });
+      } catch (e) {
+      if (e !== BreakException) throw e;
+   }
+
   }
+
+  launchSelectCabPage()
+  {
+       this.getSelectedCabs();
+
+        this.routeCount =  1; 
+        this.storage.set('route_count',  this.routeCount);
+        
+        this.navCtrl.push(SelectCabRoutePage)
+            //creating selected cab object
+  }
+
+
+  getSelectedCabs()
+  {
+        var objSelectedCab = new SelectedCab;
+        objSelectedCab.cabList = new Array();
+        let cab_route_no = 0;
+        this.booking.travelplans.forEach(travelplan => {
+        alert(JSON.stringify(travelplan));
+        alert("to " +travelplan.tocab_selected);
+        alert("from " + travelplan.fromcab_selected);
+        if(travelplan.tocab_selected == true)
+        {
+         cab_route_no = cab_route_no +1;
+         objSelectedCab.cabList.push({route_no:cab_route_no,from_loc_name:"",to_loc_name:travelplan.origin_airport,lat:"",lng:"",cabType:"ToAirport"});
+        }
+        if(travelplan.fromcab_selected == true)
+        {
+         cab_route_no = cab_route_no +1;
+         objSelectedCab.cabList.push({route_no:cab_route_no,from_loc_name:travelplan.destination_airport,to_loc_name:" ",lat:"",lng:"",cabType:"FromAirport"});
+        }
+        
+      });
+      
+      alert(objSelectedCab.cabList.length);
+      this.storage.set('selected_cabs',  objSelectedCab);
+  }
+
+
 
 }
 

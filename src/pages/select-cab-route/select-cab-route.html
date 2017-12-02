@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Choose Cab
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-list>
+  <ion-item>
+    <ion-label floating >Choose Origin</ion-label>
+    <ion-input type="text" [value]="Origin" id="txtOrigin" [disabled]='FromAirport'></ion-input>
+  </ion-item>
+ 
+  <ion-item>
+    <ion-label floating>To Where?</ion-label>
+    <ion-input   type="text" [(ngModel)]="Destination" id="txtDestination" [disabled]='ToAirport' required ></ion-input>
+  </ion-item>
+</ion-list>
+ <button ion-button full (click)="launchNextPage()"> Next</button>
+<div id="map" class="item-text-wrap">
+  
+</div>
+</ion-content>

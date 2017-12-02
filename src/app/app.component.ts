@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { HomePage } from '../pages/home/home';
 import { GetPnrPage } from '../pages/get-pnr/get-pnr';
+import {SelectCabRoutePage} from '../pages/select-cab-route/select-cab-route';
 @Component({
   templateUrl: 'app.html'
 })

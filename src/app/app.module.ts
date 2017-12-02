@@ -5,12 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule }      from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { GetPnrPage } from '../pages/get-pnr/get-pnr';
-import {SelectRoutePage} from '../pages/select-route/select-route'
-import {GoogleplaceDirective} from './mapsautocomplete.directive'
+import {SelectRoutePage} from '../pages/select-route/select-route';
+import {SelectCabRoutePage} from '../pages/select-cab-route/select-cab-route';
+import {GoogleplaceDirective} from './mapsautocomplete.directive';
 
 @NgModule({
   declarations: [
@@ -18,16 +20,20 @@ import {GoogleplaceDirective} from './mapsautocomplete.directive'
     HomePage,
     SelectRoutePage,
     GetPnrPage,
+    SelectCabRoutePage,
     GoogleplaceDirective
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),HttpModule 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    SelectCabRoutePage,
     GetPnrPage,
     HomePage,
     SelectRoutePage

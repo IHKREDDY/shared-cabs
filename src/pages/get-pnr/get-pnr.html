@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
   <ion-content padding>
 
   <ion-card>
@@ -20,32 +19,40 @@
     <ion-card-header>
     Retrieve booking
     </ion-card-header>
-
-    <ion-card-content>
-    <ion-grid>    
+<form  #getbookingForm="ngForm">
+    <ion-card-content class="form-group" >
+    <ion-grid >    
       <ion-row>
-      <ion-col width-35>
-      <ion-input   placeholder="Last Name"  [(ngModel)]="LName" ></ion-input>
+      <ion-col width-35 >
+      <ion-input type="text" name="lastName"   required placeholder="Last Name"  [(ngModel)]="LName" #lastName="ngModel" ></ion-input>
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+          <div *ngIf="lastName.errors.required">
+            LastName is required.
+          </div>
+        </div>
       </ion-col>
     <ion-col width-35>
-      <ion-input   placeholder="Booking Reference"  [(ngModel)]="PNR" ></ion-input>
+      <ion-input typ=text name="pnrNum"  required  [(ngModel)]="PNR"  placeholder="Booking Reference" #pnrNum="ngModel" ></ion-input>
+          <div *ngIf="pnrNum.invalid && (pnrNum.dirty || pnrNum.touched)" class="alert alert-danger">
+          <div *ngIf="pnrNum.errors.required">
+            Booking Reference is required.
+          </div>
+        </div>
       </ion-col>
       <ion-col width-30>
-              <button ion-button full (click)="getPNRDetails()"> Go</button>
+              <button ion-button full (click)="getPNRDetails()" class="btn btn-default"
+              [disabled]="getbookingForm.invalid"> Go</button>
       </ion-col>
     </ion-row>
     </ion-grid>
     </ion-card-content>
-
+  </form>
 </ion-card>
-
+<div [hidden]="pnrNotFound">
 <ion-card>
-
   <ion-card-header>
     Passenger list
   </ion-card-header>
-
-
   <ion-card-content>
    <ion-list *ngFor="let pax of booking.paxes">
     <ion-item>
@@ -55,29 +62,26 @@
   </ion-list>
  </ion-card-content>
 </ion-card>
-
 <ion-card>
 
   <ion-card-header>
     Available Cab  options
   </ion-card-header>
 
-
   <ion-card-content>
    <ion-list *ngFor="let travelplan of booking.travelplans">
     <ion-item>
       <ion-label>To {{travelplan.origin_airport}}</ion-label>
-      <ion-checkbox  checked="false"></ion-checkbox>
+      <ion-checkbox  checked="false" [(ngModel)]="travelplan.tocab_selected" ></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>From {{travelplan.destination_airport}}</ion-label>
-      <ion-checkbox checked="false"></ion-checkbox>
+      <ion-checkbox checked="false"  [(ngModel)]="travelplan.fromcab_selected" ></ion-checkbox>
     </ion-item>
   </ion-list>
  </ion-card-content>
 </ion-card>
 
-
-<button ion-button full >Continue</button>
-
+<button ion-button full (click)="launchSelectCabPage()">Continue</button>
+  </div>
 </ion-content>
