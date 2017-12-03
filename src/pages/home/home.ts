@@ -44,7 +44,7 @@ export class HomePage {
        //this.googleOriginName = 'Dubai International Airport';
        var thisClass = this;
        this.googleOriginName = {"lat":25.2531745,"lng":55.365672800000084};
-       this.mapsUitlity.setMapsAutoComplete(document.getElementById('txtDestination'),function(destination)
+       MapsUitlity.setMapsAutoComplete(document.getElementById('txtDestination'),function(destination)
        {
           thisClass.googleDestinationName = destination;
            console.log(JSON.stringify(destination));

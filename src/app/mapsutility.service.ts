@@ -7,6 +7,23 @@ declare var autocomplete;
 @Injectable()
 export class MapsUitlity {  
 
+     static getGeocodeAddress(address,setAdress: (location:any) => void) {
+        let geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            // resultsMap.setCenter(results[0].geometry.location);
+            // var marker = new google.maps.Marker({
+            //   map: resultsMap,
+            //   position: results[0].geometry.location
+            // });
+           setAdress(results[0].geometry.location); 
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+            setAdress('');
+          }
+        });
+      }
+
 static displayGoogleRoute(mapDiv,Origin,Destination) {
         let directionsService = new google.maps.DirectionsService;
         let directionsDisplay = new google.maps.DirectionsRenderer;
@@ -42,10 +59,11 @@ static calculateDistance(lat1, lon1, lat2, lon2, unit) {
 	return dist
 }
 
-setMapsAutoComplete(txtElement,displayRoute: (destination:any) => void)
+static setMapsAutoComplete(txtElement,displayRoute: (location:any) => void)
 {
-    var nativeTxtDestination = txtElement.getElementsByTagName('input')[0];
-    var autocomplete = new google.maps.places.Autocomplete(nativeTxtDestination);
+    var nativeTxtLocation = txtElement.getElementsByTagName('input')[0];
+    var autocomplete = new google.maps.places.Autocomplete(nativeTxtLocation);
+    console.log(txtElement);
     google.maps.event.addListener(autocomplete, 'place_changed', ()=> {
      var place = autocomplete.getPlace();
       displayRoute(place.geometry.location);
