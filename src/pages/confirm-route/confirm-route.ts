@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { SelectedCab } from '../../app/SelectedCab';
+import { MapsUitlity } from '../../app/mapsutility.service';
+import { NgZone } from '@angular/core';
 
 /**
  * Generated class for the ConfirmRoutePage page.
@@ -8,18 +12,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-confirm-route',
   templateUrl: 'confirm-route.html',
 })
 export class ConfirmRoutePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+selectedCab : SelectedCab;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public storage: Storage, public mapsUitlity: MapsUitlity) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConfirmRoutePage');
+      this.storage.get('selected_cabs').then((selected_cab) => {
+      this.selectedCab = selected_cab;
+    });
+
   }
 
 }

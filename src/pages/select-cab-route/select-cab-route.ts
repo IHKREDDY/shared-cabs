@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SelectedCab } from '../../app/SelectedCab';
 import { Storage } from '@ionic/storage';
 import { MapsUitlity } from '../../app/mapsutility.service';
+import { NgZone } from '@angular/core';
+import { ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the SelectCabRoutePage page.
@@ -24,11 +26,17 @@ export class SelectCabRoutePage {
   routeCount: number = 0;
   ToAirport: boolean;
   FromAirport: boolean;
-  disableNextButton:boolean;
+  disableNextButton: boolean;
+  zone: any;
+  autocomplete: any;
+  autolistner: any;
+  viewCtrl:ViewController;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public mapsUitlity: MapsUitlity) {
-               this.ToAirport = false;
-              this.FromAirport = false;
+    this.zone = new NgZone({ enableLongStackTrace: false });
+    console.log('con  ' + this.autocomplete);
+    this.ToAirport = false;
+    this.FromAirport = false;
   }
   ionViewDidLoad() {
     //var objSelectedCab = new SelectedCab;
@@ -37,30 +45,26 @@ export class SelectCabRoutePage {
     // objSelectedCab.cabList.push({route_no:2,from_loc_name:"",to_loc_name:"",lat:"Chennai International Airport",lng:"",cabType:"FromAirport"});
 
     // this.storage.set('route_count',  this.routeCount +1);
-
     this.storage.get('selected_cabs').then((selected_cab) => {
       let objSelectedCab = selected_cab;
+      this.disableNextButton = true;
       this.storage.get('route_count').then((val) => {
         this.routeCount = val;
 
         objSelectedCab.cabList.forEach(route => {
           if (route.route_no == this.routeCount) {
-              alert(JSON.stringify(route));
-            this.disableNextButton =true;
-            if (route.cabType == "ToAirport") {
-              this.ToAirport = true;
-              this.FromAirport = false;
-              this.Destination = route.to_loc_name;
-              this.Origin = route.from_loc_name;;
-              this.setGoogleAutocomplete(route.cabType);
-            }
-            else if (route.cabType == "FromAirport") {
-              this.ToAirport = false;
-              this.FromAirport = true;
-              this.Origin = route.from_loc_name;
-              this.Destination = route.to_loc_name;
-              this.setGoogleAutocomplete(route.cabType);
-            }
+            this.zone.run(() => {
+              if (route.cabType == "ToAirport") {
+                this.Destination = route.to_loc_name;
+                this.Origin = route.from_loc_name;;
+                this.setGoogleAutocomplete(route.cabType);
+              }
+              else if (route.cabType == "FromAirport") {
+                this.Origin = route.from_loc_name;
+                this.Destination = route.to_loc_name;
+                this.setGoogleAutocomplete(route.cabType);
+              }
+            });
           }
         });
       });
@@ -72,33 +76,56 @@ export class SelectCabRoutePage {
   setGoogleAutocomplete(cabType) {
     var thisClass = this;
     if (cabType == "ToAirport") {
-     MapsUitlity.getGeocodeAddress(this.Destination, function (destination) {
-        thisClass.googleDestinationName = destination;
+      MapsUitlity.getGeocodeAddress(this.Destination, function (destination) {
+        thisClass.zone.run(() => {
+          thisClass.googleDestinationName = destination;
+        });
       });
-      console.log(document.getElementById('txtOrigin'));
-      MapsUitlity.setMapsAutoComplete(document.getElementById('txtOrigin'), function (origin) {
-        thisClass.googleOriginName = origin;
-        thisClass.disableNextButton = false;
-        MapsUitlity.displayGoogleRoute(document.getElementById('map'), thisClass.googleOriginName, thisClass.googleDestinationName);
+
+      this.zone.run(() => {
+        MapsUitlity.setMapsAutoComplete(document.getElementById('txtOrigin'), function (origin, autocomplete, autolistner) {
+          thisClass.zone.run(() => {
+            thisClass.googleOriginName = origin;
+            thisClass.disableNextButton = false;
+            thisClass.autocomplete = autocomplete;
+            thisClass.autolistner = autolistner;
+           // thisClass.ToAirport = true;
+           // thisClass.FromAirport = false;
+            MapsUitlity.displayGoogleRoute(document.getElementById('map'), thisClass.googleOriginName, thisClass.googleDestinationName);
+          });
+        });
       });
     }
     else if (cabType == "FromAirport") {
       MapsUitlity.getGeocodeAddress(this.Origin, function (origin) {
-        thisClass.googleOriginName = origin;
+        thisClass.zone.run(() => {
+          thisClass.googleOriginName = origin;
+        });
       });
 
-      MapsUitlity.setMapsAutoComplete(document.getElementById('txtDestination'), function (destination) {
-        thisClass.googleDestinationName = destination;
-        MapsUitlity.displayGoogleRoute(document.getElementById('map'), thisClass.googleOriginName, thisClass.googleDestinationName);
-        thisClass.disableNextButton = false;
+      this.zone.run(() => {
+        MapsUitlity.setMapsAutoComplete(document.getElementById('txtOrigin'), function (destination, autocomplete, autolistner) {
+          thisClass.zone.run(() => {
+            thisClass.googleDestinationName = destination;
+            thisClass.autocomplete = autocomplete;
+            thisClass.autolistner = autolistner;
+          //  thisClass.ToAirport = false;
+            //thisClass.FromAirport = true;
+            MapsUitlity.displayGoogleRoute(document.getElementById('map'), thisClass.googleOriginName, thisClass.googleDestinationName);
+            thisClass.disableNextButton = false;
+          });
+        });
       });
     }
   }
+
+  
 
 
   launchNextPage() {
     this.routeCount = this.routeCount + 1;
     this.storage.set('route_count', this.routeCount);
+    MapsUitlity.removeMapsAutoComplete(this.autocomplete, this.autolistner);
     this.navCtrl.push(SelectCabRoutePage);
   }
 }

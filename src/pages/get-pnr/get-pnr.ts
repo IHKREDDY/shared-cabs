@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { SelectedCab } from '../../app/SelectedCab';
 import { SelectCabRoutePage } from '../select-cab-route/select-cab-route';
+import {SelectRoute1Page} from '../select-route1/select-route1';
 
 
 /**
@@ -75,7 +76,7 @@ export class GetPnrPage {
     this.routeCount = 1;
     this.storage.set('route_count', this.routeCount);
 
-    this.navCtrl.push(SelectCabRoutePage)
+    this.navCtrl.push(SelectRoute1Page);
 
   }
 
@@ -87,11 +88,11 @@ export class GetPnrPage {
     this.booking.travelplans.forEach(travelplan => {
       if (travelplan.tocab_selected == true) {
         cab_route_no = cab_route_no + 1;
-        objSelectedCab.cabList.push({ route_no: cab_route_no, from_loc_name: "", to_loc_name: travelplan.origin_airport, lat: "", lng: "", cabType: "ToAirport" });
+        objSelectedCab.cabList.push({ route_no: cab_route_no, from_loc_name: "", to_loc_name: travelplan.origin_airport, from_coordinates: "", to_coordinates: "", cabType: "ToAirport" });
       }
       if (travelplan.fromcab_selected == true) {
         cab_route_no = cab_route_no + 1;
-        objSelectedCab.cabList.push({ route_no: cab_route_no, from_loc_name: travelplan.destination_airport, to_loc_name: " ", lat: "", lng: "", cabType: "FromAirport" });
+        objSelectedCab.cabList.push({ route_no: cab_route_no, from_loc_name: travelplan.destination_airport, to_loc_name: " ", from_coordinates: "", to_coordinates: "", cabType: "FromAirport" });
       }
 
     });

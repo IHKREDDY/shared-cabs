@@ -12,6 +12,9 @@ import { HomePage } from '../pages/home/home';
 import { GetPnrPage } from '../pages/get-pnr/get-pnr';
 import {SelectRoutePage} from '../pages/select-route/select-route';
 import {SelectCabRoutePage} from '../pages/select-cab-route/select-cab-route';
+import {SelectRoute1Page} from '../pages/select-route1/select-route1';
+import {SelectRoute2Page} from '../pages/select-route2/select-route2';
+import {ConfirmRoutePage} from '../pages/confirm-route/confirm-route';
 import {GoogleplaceDirective} from './mapsautocomplete.directive';
 
 @NgModule({
@@ -21,7 +24,10 @@ import {GoogleplaceDirective} from './mapsautocomplete.directive';
     SelectRoutePage,
     GetPnrPage,
     SelectCabRoutePage,
-    GoogleplaceDirective
+    GoogleplaceDirective,
+    SelectRoute1Page,
+    SelectRoute2Page,
+    ConfirmRoutePage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,10 @@ import {GoogleplaceDirective} from './mapsautocomplete.directive';
     SelectCabRoutePage,
     GetPnrPage,
     HomePage,
-    SelectRoutePage
+    SelectRoutePage,
+    SelectRoute1Page,
+    SelectRoute2Page,
+    ConfirmRoutePage
   ],
   providers: [
     StatusBar,

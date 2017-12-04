@@ -7,12 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>select-route1</ion-title>
+    <ion-title>Select Cab
+      <label *ngIf="FromAirport"> From {{Origin}}</label>
+      <label *ngIf="ToAirport"> To {{Destination}}</label>
+   </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+<ion-list>
+  <ion-item>
+    <ion-label floating >
+      <label *ngIf="FromAirport"> To </label>
+      <label *ngIf="ToAirport"> From </label>
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="Location" id="txtLocation" ></ion-input>
+  </ion-item>
+</ion-list>
+ <button ion-button full (click)="launchNextPage()"  [disabled]="disableNextButton" [hidden]="ShowContinue" > Next</button>
+  <button ion-button full (click)="launchConfirmationPage()" [disabled]="disableNextButton"  [hidden]="!ShowContinue" > Continue</button>
+<div id="map1" class="item-text-wrap" [hidden]="HideMap">
+</div>
 
 </ion-content>

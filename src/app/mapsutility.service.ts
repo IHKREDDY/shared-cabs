@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 
 declare var google;
 declare var autocomplete;
+declare var autolistner;
 
 @Injectable()
 export class MapsUitlity {  
-
      static getGeocodeAddress(address,setAdress: (location:any) => void) {
         let geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': address}, function(results, status) {
@@ -39,11 +39,22 @@ static displayGoogleRoute(mapDiv,Origin,Destination) {
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
+            MapsUitlity.intiMap(mapDiv,directionsDisplay);
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
       }
+
+static intiMap(mapDiv,directionsDisplay)
+{
+      let map = new google.maps.Map(mapDiv, {
+          zoom: 17,
+          center: {lat: 41.85, lng: -87.65}
+        });
+
+       directionsDisplay.setMap(map);
+}
 
 static calculateDistance(lat1, lon1, lat2, lon2, unit) {
 	let radlat1 = Math.PI * lat1/180
@@ -59,15 +70,28 @@ static calculateDistance(lat1, lon1, lat2, lon2, unit) {
 	return dist
 }
 
-static setMapsAutoComplete(txtElement,displayRoute: (location:any) => void)
+static setMapsAutoComplete(txtElement,displayRoute: (location:any,autocompleteref:any,autolistnerref:any) => void)
 {
     var nativeTxtLocation = txtElement.getElementsByTagName('input')[0];
     var autocomplete = new google.maps.places.Autocomplete(nativeTxtLocation);
-    console.log(txtElement);
-    google.maps.event.addListener(autocomplete, 'place_changed', ()=> {
-     var place = autocomplete.getPlace();
-      displayRoute(place.geometry.location);
+    var autolistner = google.maps.event.addListener(autocomplete, 'place_changed', ()=> {
+    var place = autocomplete.getPlace();
+    displayRoute(place.geometry.location,autocomplete,autolistner);
         });
+}
+
+static removeMapsAutoComplete(autocomplete,autolistner)
+{
+  if(autocomplete)
+  {
+    //autocomplete = null;
+    //google.maps.event.removeListener(autocomplete);
+     //google.maps.event.clearInstanceListeners(autocomplete);
+  }
+  if(autolistner)
+  {
+    google.maps.event.clearInstanceListeners(autolistner);
+  }
 }
 
 } 
