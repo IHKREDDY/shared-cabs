@@ -94,4 +94,27 @@ static removeMapsAutoComplete(autocomplete,autolistner)
   }
 }
 
+static displayGoogleMultiRoute(mapDiv,Origin,Destination,waypts) {
+        let directionsService = new google.maps.DirectionsService;
+        let directionsDisplay = new google.maps.DirectionsRenderer;
+        let map = new google.maps.Map(mapDiv, {
+          zoom: 17,
+          center: {lat: 41.85, lng: -87.65}
+        });
+        directionsDisplay.setMap(map);
+        directionsService.route({
+          origin: Origin,
+          destination: Destination,
+          travelMode: 'DRIVING',
+          waypoints: waypts
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            MapsUitlity.intiMap(mapDiv,directionsDisplay);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+
 } 

@@ -43,10 +43,28 @@ export class ConfirmRoutePage {
   setMaps() {
     console.log(JSON.stringify(this.selectedCab.cabList));
     this.selectedCab.cabList.forEach(cab => {
+      var waypts = [];
       this.zone.run(() => {
-       MapsUitlity.displayGoogleRoute(document.getElementById('map' + cab.route_no+1), cab.from_coordinates, cab.to_coordinates);
+        if(cab.route_no == 1)
+        {
+              waypts.push({
+              location: {lat:25.2145565,lng:55.3032906},
+              stopover: true
+            });
+        }
+        else
+        {
+              waypts.push({
+              location: {lat:9.9252007,lng:78.1197754},
+              stopover: true
+            });
+        }
+       MapsUitlity.displayGoogleMultiRoute(document.getElementById('map' + cab.route_no+1), cab.from_coordinates, cab.to_coordinates,waypts);
       });
     });
   }
+
+ 
+  
 
 }
