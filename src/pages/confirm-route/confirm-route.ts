@@ -15,18 +15,38 @@ import { NgZone } from '@angular/core';
 @Component({
   selector: 'page-confirm-route',
   templateUrl: 'confirm-route.html',
+  providers: [MapsUitlity]
 })
 export class ConfirmRoutePage {
 
-selectedCab : SelectedCab;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage: Storage, public mapsUitlity: MapsUitlity) {
+  zone: any;
+  selectedCab: SelectedCab =  {
+    paxCount:0,
+    PNR:"",
+    cabList: [{route_no: 1, from_loc_name: "", to_loc_name: "",from_coordinates:"",to_coordinates:"",cabType:""}],
+  };
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public mapsUitlity: MapsUitlity) {
+    this.zone = new NgZone({ enableLongStackTrace: false });
+        this.storage.get('selected_cabs').then((selected_cab) => {
+      this.zone.run(() => {
+        this.selectedCab = JSON.parse(selected_cab);
+      });
+    });
   }
 
   ionViewDidLoad() {
-      this.storage.get('selected_cabs').then((selected_cab) => {
-      this.selectedCab = selected_cab;
-    });
+    var thisClass =this;
+    window.setTimeout(function(){ thisClass.setMaps();}, 1000);
+  }
 
+  setMaps() {
+    console.log(JSON.stringify(this.selectedCab.cabList));
+    this.selectedCab.cabList.forEach(cab => {
+      this.zone.run(() => {
+       MapsUitlity.displayGoogleRoute(document.getElementById('map' + cab.route_no+1), cab.from_coordinates, cab.to_coordinates);
+      });
+    });
   }
 
 }

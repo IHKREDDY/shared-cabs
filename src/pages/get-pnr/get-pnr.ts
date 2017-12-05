@@ -36,6 +36,9 @@ export class GetPnrPage {
   displayWarning: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, public storage: Storage) {
     this.pnrNotFound = true;
+    //clear storage
+    this.storage.clear();
+
   }
 
 
@@ -97,7 +100,7 @@ export class GetPnrPage {
 
     });
 
-    this.storage.set('selected_cabs', objSelectedCab);
+    this.storage.set('selected_cabs', JSON.stringify(objSelectedCab));
   }
 
 

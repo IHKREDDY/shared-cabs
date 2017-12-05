@@ -32,6 +32,7 @@ export class SelectRoute1Page {
   Location:any;
   HideMap:boolean;
   ShowContinue:boolean;
+  selectedCab: SelectedCab = new SelectedCab();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public mapsUitlity: MapsUitlity) {
     this.zone = new NgZone({ enableLongStackTrace: false });
@@ -49,14 +50,16 @@ export class SelectRoute1Page {
     // objSelectedCab.cabList.push({route_no:2,from_loc_name:"",to_loc_name:"",lat:"Chennai International Airport",lng:"",cabType:"FromAirport"});
 
     // this.storage.set('route_count',  this.routeCount +1);
-  
+   var thisClass = this;
      //clear details
      this.Location = "";
      this.Origin = "";
      this.Destination = "";
      this.HideMap = true;
+
+     //get Cabs from storage
     this.storage.get('selected_cabs').then((selected_cab) => {
-      let objSelectedCab = selected_cab;
+      let objSelectedCab = JSON.parse(selected_cab);
       this.disableNextButton = true;
       this.storage.get('route_count').then((val) => {
         this.routeCount = val;
@@ -134,38 +137,50 @@ export class SelectRoute1Page {
     }
   }
 
-  updateCoordinates()
+  updateCoordinates(currenRouteNo,redirect:()=>void)
   {
-        this.storage.get('selected_cabs').then((selected_cab) => {
-      let objSelectedCab = selected_cab;
-      this.storage.get('route_count').then((val) => {
-        this.routeCount = val;
-
+    var thisClass = this;
+      this.storage.get('selected_cabs').then((selected_cab) => {
+      let objSelectedCab = JSON.parse(selected_cab);
         objSelectedCab.cabList.forEach(route => {
-          if (route.route_no == this.routeCount) {
+          if (route.route_no == currenRouteNo) {
             this.zone.run(() => {
+              console.log(this.googleOriginName + "   " + this.googleDestinationName);
                 route.from_coordinates = this.googleOriginName;
                 route.to_coordinates =this.googleDestinationName;
+                thisClass.updStorage(objSelectedCab);
+                redirect();
             });
           }
         });
-      });
     });
-
+    
   }
 
 
   launchNextPage() {
-    this.routeCount = this.routeCount + 1;
-    this.storage.set('route_count', this.routeCount);
-    this.updateCoordinates();
-    this.loadNextCab();
+    let currentRoute = this.routeCount;
+    var thisClass= this;
+    this.updateCoordinates(currentRoute,function()
+    {
+    thisClass.routeCount = thisClass.routeCount + 1;
+    thisClass.storage.set('route_count', thisClass.routeCount);
+    thisClass.loadNextCab();
+    });
   }
 
-  launchConfirmationPage()
+ launchConfirmationPage()
   {
-    this.updateCoordinates();
-    this.loadNextCab();
-    this.navCtrl.push(ConfirmRoutePage);
+    var thisClass= this;
+    this.updateCoordinates(this.routeCount,function()
+    {
+      thisClass.navCtrl.push(ConfirmRoutePage);
+    });
+  }
+
+  updStorage(objSelectedCab:SelectedCab)
+  {
+ // this.selectedCab = objSelectedCab;
+      this.storage.set('selected_cabs',JSON.stringify(objSelectedCab));
   }
 }

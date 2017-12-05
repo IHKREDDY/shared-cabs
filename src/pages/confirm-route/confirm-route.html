@@ -14,6 +14,14 @@
 
 
 <ion-content padding>
+<ion-card *ngFor="let cab of selectedCab.cabList">
+  <div  [attr.id]="'map' + cab.route_no+1" class="item-text-wrap map" > </div>
+  <ion-card-content>
+    <ion-card-title>
+      Cab {{cab.route_no}}
+      </ion-card-title>
+  </ion-card-content>
+</ion-card>
 
-
+<button ion-button full  > Confirm Cab</button>
 </ion-content>
