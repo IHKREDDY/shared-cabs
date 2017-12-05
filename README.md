@@ -3,5 +3,10 @@
 2. Change Directory to app folder
 3. Run app - Ionic serve
 
+## Technologies learnt
+- Ionic Framework for developing cross platform mobile apps
+- Angular
+- Typescript
+- Mongo DB
 
 
